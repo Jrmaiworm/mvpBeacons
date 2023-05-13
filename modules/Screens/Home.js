@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   Modal,
+  Alert,
 } from 'react-native';
 import React, {useEffect, useState, useRef, useCallback, useMemo} from 'react';
 import {apiget} from '../../android/app/src/services/api';
@@ -17,6 +18,8 @@ import {styles} from './styles/styles';
 import LocationTracker from '../components/locationTracker';
 import {requestLocationPermission} from '../components/requestLocationPermission ';
 import searchGif from '../../assets/search.gif';
+import backgroundImage from '../../assets/back-head.jpg';
+
 
 const Home = ({navigation}) => {
   const [message, setMessage] = useState('Scanear de Beacons');
@@ -101,6 +104,7 @@ const Home = ({navigation}) => {
 
     requestLocationPermission(setLocation);
   }, []);
+  // console.log("devs", devices)
 
   const handleDeviceFound = device => {
     setDevices(prevDevices => {
@@ -131,15 +135,27 @@ const Home = ({navigation}) => {
 
   const mapViewRef = useRef(null);
 
+  // useEffect(() => {
+  //   devices.forEach(device => {
+  //     const distance = distances[device.id];
+      
+  //     if (distance && distance < 10) {
+  //       Alert.alert('Alerta', `Beacon ${device.id} está a uma distância inferior a 10 metros!`);
+  //     }
+  //   });
+  // }, [devices, distances]);
+ 
+
   return (
     <>
       <View>
         <View
           style={{
+            backgroundColor: '#3b599999',
+            padding: 12,
+            borderRadius: 4,
             justifyContent: 'center',
-            alignItems: 'center',
-            position: 'relative',
-            backgroundColor: '#666',
+            alignItems: 'center'
           }}>
           <LocationTracker />
           <TouchableOpacity
@@ -201,7 +217,8 @@ const Home = ({navigation}) => {
                 key={item.id}
                 coordinate={{latitude: item?.lat, longitude: item?.lng}}
                 title={item?.nome}
-                description={item?.descricao}>
+              
+                  description={item?.descricao}>
                 <Image
                   source={
                     beaconsCadastrados.includes(item.id) &&
@@ -236,6 +253,8 @@ const Home = ({navigation}) => {
                   </Text>
                   <Text>sinal: {item?.rssi}</Text>
                   <Text>distância: {distances[item.id]}</Text>
+                  {/* { <Text style={{color:'red'}}>Beacon {item.nome} muito perto!  </Text>} */}
+                 
                 </View>
               )}
             />

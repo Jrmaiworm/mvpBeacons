@@ -1,28 +1,39 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import LocationTracker from '../components/locationTracker';
+import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+
+
+const backgroundImage = require('../../assets/back.png');
 
 const MainScreen = ({ navigation }) => {
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Página Principal</Text>
+    <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Mvp Beacons</Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Home')}>
-        <Text style={styles.buttonText}>Mapa</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Home')}>
+          <Text style={styles.buttonText}>Mapa</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('BeaconRegister')}>
-        <Text style={styles.buttonText}>Cadastrar Beacons</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('BeaconRegister')}>
+          <Text style={styles.buttonText}>Cadastrar Beacons</Text>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
