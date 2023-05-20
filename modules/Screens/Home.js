@@ -135,15 +135,15 @@ const Home = ({navigation}) => {
 
   const mapViewRef = useRef(null);
 
-  // useEffect(() => {
-  //   devices.forEach(device => {
-  //     const distance = distances[device.id];
+  useEffect(() => {
+    devices.forEach(device => {
+      const distance = distances[device.id];
       
-  //     if (distance && distance < 10) {
-  //       Alert.alert('Alerta', `Beacon ${device.id} está a uma distância inferior a 10 metros!`);
-  //     }
-  //   });
-  // }, [devices, distances]);
+      if (distance && distance < 10) {
+        Alert.alert('Alerta', `Beacon ${device.id} está a uma distância inferior a 10 metros!`);
+      }
+    });
+  }, [devices, distances]);
  
 
   return (
